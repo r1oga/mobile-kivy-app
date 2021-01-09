@@ -1,3 +1,6 @@
 # Feel Good App
 
-Minimal quotes mobile applicationn built with [kivy](https://kivy.org)
+Minimal quotes mobile application.
+
+- built with [kivy](https://kivy.org)
+- local storage
