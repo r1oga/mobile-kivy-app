@@ -91,8 +91,13 @@ class LoginScreenSuccess(Screen):
         self.manager.current = "login_screen"
 
     def get_quote(self):
-        quote = get_random_line(f"data/{feeling}.txt")
-        self.ids.quote.text = quote
+        try:
+            quote = get_random_line(f"data/{feeling}.txt")
+            self.ids.quote.text = quote
+        except NameError:
+            self.ids.quote.text = (
+                "You haven't selected a feeling. Select one and try again."
+            )
 
 
 class CustomDropDown(DropDown):
