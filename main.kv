@@ -52,20 +52,41 @@
             text: "Login page"
             on_press: root.redirect_to_login()
 
+<CustomDropDown>:
+    Button:
+        text: 'Sad'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('sad')
+    Button:
+        text: 'Happy'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('happy')
+    Button:
+        text: 'Unloved'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('unloved')
+
 <LoginScreenSuccess>
     GridLayout:
         cols: 1
         Button:
             text: "Logout"
             on_press: root.log_out()
-        Label:
-            text: "How do you feel?"
-        TextInput:
-            hint_text: "Things to try: happy, sad..."
+        GridLayout:
+            cols:  1
+            width: 200
+            CustomDropDown
         Button:
             text: "Enlighten me"
+            on_press: root.get_quote()
         Label:
+            id: quote
             text: ""
+
+
 
 <RootWidget>
     LoginScreen:

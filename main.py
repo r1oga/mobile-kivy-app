@@ -2,18 +2,28 @@ from json.decoder import JSONDecodeError
 from kivy.app import App
 import json
 from datetime import datetime
+import random
 
 # from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.dropdown import DropDown
+
+USERS_DB_PATH = "data/users.json"
 
 
 def check_credentials(username, password):
-    with open("users.json") as f:
+    with open(USERS_DB_PATH) as f:
         users = json.load(f)
         if username in users and users[username]["password"] == password:
             return True
 
         f.close()
+
+
+def get_random_line(file_path):
+    with open(file_path) as f:
+        lines = f.read().splitlines()
+        return random.choice(lines)
 
 
 class LoginScreen(Screen):
@@ -35,7 +45,7 @@ class LoginScreen(Screen):
 
 def _write(data):
     data["created_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open("users.json", "r+") as f:
+    with open(USERS_DB_PATH, "r+") as f:
         content = {}
         try:
             content = json.load(f)
@@ -52,7 +62,7 @@ def write(data):
     try:
         _write(data)
     except FileNotFoundError:
-        with open("users.json", "w") as f:
+        with open(USERS_DB_PATH, "w") as f:
             f.close()
 
         _write(data)
@@ -79,6 +89,16 @@ class LoginScreenSuccess(Screen):
     def log_out(self):
         self.manager.transition.direction = "right"
         self.manager.current = "login_screen"
+
+    def get_quote(self):
+        quote = get_random_line(f"data/{feeling}.txt")
+        self.ids.quote.text = quote
+
+
+class CustomDropDown(DropDown):
+    def select(self, _feeling):
+        global feeling
+        feeling = _feeling
 
 
 class RootWidget(ScreenManager):
