@@ -3,34 +3,55 @@
         cols: 1
         GridLayout:
             cols: 1
+            padding: 15, 15
+            spacing: 20, 20
             Label:
                 text: "User Login"
+                font_size: "20sp" # space independent pixels
             TextInput:
                 id: username
                 hint_text: "Username"
             TextInput:
                 id: password
+                password: True
                 hint_text: "Password"
-            Button:
-                text: "Login"
-                on_press: root.login()
+            RelativeLayout:
+                Button:
+                    text: "Login"
+                    on_press: root.login()
+                    size_hint: 0.3, 1
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
             Label:
                 id: login_error_message
                 text: ""
         GridLayout:
             cols: 2
+            padding: 10, 10
+            spacing: 10, 0
+            size_hint: 0.25, 0.25
             Button:
                 text: "Forgot Password?"
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == "normal" else 0.7
+                color: "cyan"
             Button:
                 text: "Sign Up"
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == "normal" else 0.7
+                color: "cyan"
                 on_press: root.sign_up()
 
 <SignUpScreen>
     GridLayout:
         cols: 1
+        padding: 20, 20
+        spacing: 20, 20
         Button:
             text: "Back"
             on_press: root.redirect_to_login()
+            background_color: 1, 1, 1, 0
+            opacity: 1 if self.state == "normal" else 0.7
+            color: "cyan"
         Label:
             text: "Sign up"
         TextInput:
@@ -38,10 +59,14 @@
             hint_text: "Username"
         TextInput:
             id: password
+            password: True
             hint_text: "Password"
         Button:
             text: "Submit"
             on_press: root.add_user()
+            background_color: 1, 1, 1, 0
+            opacity: 1 if self.state == "normal" else 0.7
+            color: "cyan"
 
 <SignUpScreenSuccess>
     GridLayout:
@@ -72,19 +97,31 @@
 <LoginScreenSuccess>
     GridLayout:
         cols: 1
+        padding: 20, 20
+        spacing: 20, 20
         Button:
             text: "Logout"
             on_press: root.log_out()
+            background_color: 1, 1, 1, 0
+            opacity: 1 if self.state == "normal" else 0.7
+            color: "cyan"
         GridLayout:
             cols:  1
             width: 200
-            CustomDropDown
-        Button:
-            text: "Enlighten me"
-            on_press: root.get_quote()
+            RelativeLayout:
+                CustomDropDown:
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        RelativeLayout:
+            Button:
+                text: "Enlighten me"
+                on_press: root.get_quote()
+                size_hint: 0.3, 0.5
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
         Label:
             id: quote
             text: ""
+            color: "orange"
 
 
 
