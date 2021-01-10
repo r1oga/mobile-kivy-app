@@ -33,20 +33,29 @@ class LoginScreen(Screen):
             self.ids.login_error_message.text = "Wrong credentials"
 
 
-def write(data):
+def _write(data):
     data["created_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open("users.json", "r+") as f:
         content = {}
         try:
             content = json.load(f)
         except JSONDecodeError as e:
-            print(e)
             pass
 
         content[data["username"]] = data
         f.seek(0)
         json.dump(content, f)
         f.close()
+
+
+def write(data):
+    try:
+        _write(data)
+    except FileNotFoundError:
+        with open("users.json", "w") as f:
+            f.close()
+
+        _write(data)
 
 
 class SignUpScreen(Screen):
