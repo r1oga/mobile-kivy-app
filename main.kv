@@ -115,10 +115,14 @@
                 size_hint: 0.3, 0.5
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
-        Label:
-            id: quote
-            text: ""
-            color: "orange"
+        ScrollView:
+            Label:
+                id: quote
+                text: ""
+                color: "orange"
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
 
 
 
