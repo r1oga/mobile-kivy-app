@@ -99,18 +99,15 @@
         cols: 1
         padding: 20, 20
         spacing: 20, 20
-        Button:
-            text: "Logout"
-            on_press: root.log_out()
-            background_color: 1, 1, 1, 0
-            opacity: 1 if self.state == "normal" else 0.7
-            color: "cyan"
-        GridLayout:
-            cols:  1
-            width: 200
-            RelativeLayout:
-                CustomDropDown:
-                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        RelativeLayout:
+            ImageButton:
+                source: "logout_hover.png" if self.hovered else "logout_not_hover.png"
+                on_press: root.log_out()
+                size_hint: 0.35, 0.35
+                pos_hint: {"center_x": 0.9, "center_y": 0.8}
+        RelativeLayout:
+            CustomDropDown:
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
         RelativeLayout:
             Button:
                 text: "Enlighten me"

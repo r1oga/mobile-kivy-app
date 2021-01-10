@@ -3,10 +3,11 @@ from kivy.app import App
 import json
 from datetime import datetime
 import random
-
-# from kivy.lang import Builder
+from hoverable import HoverBehavior
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.dropdown import DropDown
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
 
 USERS_DB_PATH = "data/users.json"
 
@@ -107,6 +108,10 @@ class CustomDropDown(DropDown):
 
 
 class RootWidget(ScreenManager):
+    pass
+
+
+class ImageButton(ButtonBehavior, HoverBehavior, Image):
     pass
 
 
