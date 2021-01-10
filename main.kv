@@ -33,9 +33,20 @@
         Button:
             text: "Submit"
             on_press: root.add_user(**{k: v.text for k, v in root.ids.items()})
-        
+
+<SignUpScreenSuccess>
+    GridLayout:
+        cols: 1
+        Label:
+            text: "Sign Up Successful"
+        Button:
+            text: "Login page"
+            on_press: root.redirect_to_login()
+
 <RootWidget>
     LoginScreen:
         name: "login_screen"
     SignUpScreen:
         name: "sign_up_screen"
+    SignUpScreenSuccess:
+        name: "sign_up_screen_success"

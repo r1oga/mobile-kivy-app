@@ -34,6 +34,13 @@ def write(data):
 class SignUpScreen(Screen):
     def add_user(self, **kwargs):
         write(kwargs)
+        self.manager.current = "sign_up_screen_success"
+
+
+class SignUpScreenSuccess(Screen):
+    def redirect_to_login(self):
+        self.manager.transition.direction = "right"
+        self.manager.current = "login_screen"
 
 
 class RootWidget(ScreenManager):
