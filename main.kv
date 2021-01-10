@@ -28,6 +28,9 @@
 <SignUpScreen>
     GridLayout:
         cols: 1
+        Button:
+            text: "Back"
+            on_press: root.redirect_to_login()
         Label:
             text: "Sign up"
         TextInput:
@@ -58,7 +61,7 @@
         Label:
             text: "How do you feel?"
         TextInput:
-            hint_test: "Things to try: happy, sad..."
+            hint_text: "Things to try: happy, sad..."
         Button:
             text: "Enlighten me"
         Label:

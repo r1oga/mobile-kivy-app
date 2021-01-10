@@ -64,6 +64,10 @@ class SignUpScreen(Screen):
         write(data)
         self.manager.current = "sign_up_screen_success"
 
+    def redirect_to_login(self):
+        self.manager.transition.direction = "right"
+        self.manager.current = "login_screen"
+
 
 class SignUpScreenSuccess(Screen):
     def redirect_to_login(self):
