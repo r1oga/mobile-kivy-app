@@ -7,10 +7,9 @@ from datetime import datetime
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 
-def check_credentials(data):
+def check_credentials(username, password):
     with open("users.json") as f:
         users = json.load(f)
-        username, password = data.values()
         if username in users and users[username]["password"] == password:
             return True
 
@@ -24,9 +23,14 @@ class LoginScreen(Screen):
     def reset_pwd(self):
         pass
 
-    def login(self, **kwargs):
-        if check_credentials(kwargs):
+    def login(self):
+        username, password = [
+            self.ids[field].text for field in ["username", "password"]
+        ]
+        if check_credentials(username, password):
             self.manager.current = "login_screen_success"
+        else:
+            self.ids.login_error_message.text = "Wrong credentials"
 
 
 def write(data):
@@ -46,8 +50,9 @@ def write(data):
 
 
 class SignUpScreen(Screen):
-    def add_user(self, **kwargs):
-        write(kwargs)
+    def add_user(self):
+        data = {k: v.text for k, v in self.ids.items()}
+        write(data)
         self.manager.current = "sign_up_screen_success"
 
 
