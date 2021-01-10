@@ -18,14 +18,14 @@ class LoginScreen(Screen):
 def write(data):
     data["created_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open("users.json", "r+") as f:
-        content = []
+        content = {}
         try:
             content = json.load(f)
         except JSONDecodeError as e:
             print(e)
             pass
 
-        content.append(data)
+        content[data["username"]] = data
         f.seek(0)
         json.dump(content, f)
         f.close()
